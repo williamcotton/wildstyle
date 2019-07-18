@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ApplicationResource is similar to ApplicationRecord - a base class that
 # holds configuration/methods for subclasses.
 # All Resources should inherit from ApplicationResource.
