@@ -1,0 +1,70 @@
+{
+  "name": "wildstyle",
+  "version": "0.0.1",
+  "description": "wildstyle",
+  "main": "app/server/index.js",
+  "engines": {
+    "node": "11.13.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "make",
+    "build-css-dev": "make build_debug_css",
+    "build-dev": "make build_debug_js",
+    "start-dev": "make start_dev",
+    "analyze": "make analyze",
+    "lint": "eslint ./src ./test",
+    "update-packages": "ncu -u",
+    "deploy": "git push heroku master",
+    "postinstall": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamcotton/williamcotton.com.git"
+  },
+  "author": "William Cotton",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "browser-express": "^4.5.0",
+    "compression": "^1.7.4",
+    "cookie-session": "^1.3.3",
+    "csurf": "^1.10.0",
+    "date-fns": "^1.30.1",
+    "dotenv": "^8.0.0",
+    "envify": "^4.1.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.8.0",
+    "express-sslify": "^1.2.0",
+    "form-serialize": "^0.7.2",
+    "isomorphic-fetch": "^2.2.1",
+    "node-sass": "^4.12.0",
+    "qs": "^6.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hyperscript": "^3.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "router": "^1.3.3",
+    "spraypaint": "^0.10.4",
+    "terser": "^4.1.2",
+    "uglifyify": "^5.0.1"
+  },
+  "devDependencies": {
+    "browserify": "^16.3.0",
+    "disc": "^1.3.3",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "jest": "^24.8.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.1",
+    "npm-check-updates": "^3.1.18",
+    "prettier": "^1.18.2",
+    "watchify": "^3.11.1"
+  }
+}
