@@ -5,16 +5,15 @@ const analyticsMiddleware = require('./middleware/analytics');
 
 const { analyticsRouter } = require('../../app/analytics');
 
-const applicationController = require('../../app/controllers/application');
+const applicationController = require('../../app/view-controllers/application');
 const appLayout = require('../../app/views/layout');
 
-module.exports = ({ fetch, querySelector, defaultTitle, clientRequest }) => {
+module.exports = ({ fetch, querySelector, clientRequest }) => {
   const app = express();
   app.use(
     reactRendererMiddleware({
       app,
       querySelector,
-      defaultTitle,
       appLayout,
       clientRequest
     })

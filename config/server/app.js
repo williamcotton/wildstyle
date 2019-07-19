@@ -10,7 +10,7 @@ const analyticsMiddleware = require('./middleware/analytics');
 const userAuthentication = require('./middleware/user-authentication');
 const clientRequestMiddleware = require('./middleware/client-request');
 
-const applicationController = require('../../app/controllers/application');
+const applicationController = require('../../app/view-controllers/application');
 const appLayout = require('../../app/views/layout');
 const { analyticsRouter } = require('../../app/analytics');
 

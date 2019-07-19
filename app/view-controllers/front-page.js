@@ -1,6 +1,6 @@
 const router = require('router')();
 const h = require('react-hyperscript');
-const e = require('../vendor/async-error');
+const e = require('express-async-handler');
 
 router.get(
   '/',

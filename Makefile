@@ -24,6 +24,9 @@ build_debug_js: clean_js
 start_dev:
 	nodemon config/server/index.js -w app/ -w config/ --ext js
 
+start_rails:
+	bundle exec rails s
+
 analyze:
 	browserify config/browser/index.js --full-paths $(browserify_production_flags) | ${terser_command} | discify --open
 
