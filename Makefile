@@ -27,6 +27,9 @@ start_dev:
 start_rails:
 	bundle exec rails s
 
+start_nginx:
+	nginx -c nginx.conf -p ./
+
 analyze:
 	browserify config/browser/index.js --full-paths $(browserify_production_flags) | ${terser_command} | discify --open
 
