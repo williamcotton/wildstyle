@@ -1,14 +1,6 @@
-/* global window, document */
+/* global window */
 
-const { fetch, clientRequest } = window;
-
-const querySelector = selectors => document.querySelector(selectors);
-
-const universalBrowserApp = require('./app')({
-  fetch,
-  querySelector,
-  clientRequest
-});
+const universalBrowserApp = require('./app')();
 
 universalBrowserApp.listen({}, () => {
   console.log(

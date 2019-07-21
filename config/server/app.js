@@ -4,11 +4,15 @@ const bodyParser = require('body-parser');
 const enforce = require('express-sslify');
 const cookieSession = require('cookie-session');
 const csurf = require('csurf');
+const path = require('path');
+
+const nodeEnv = process.env.NODE_ENV;
+const sessionSecret = process.env.SESSION_SECRET;
 
 const reactRendererMiddleware = require('./middleware/react-renderer');
 const analyticsMiddleware = require('./middleware/analytics');
 const userAuthentication = require('./middleware/user-authentication');
-const clientRequestMiddleware = require('./middleware/client-request');
+const expressLinkMiddleware = require('./middleware/express-link');
 
 const applicationController = require('../../app/view-controllers/application');
 const appLayout = require('../../app/views/layout');
@@ -19,14 +23,7 @@ const cookieSessionOptions = {
   sameSite: 'lax'
 };
 
-module.exports = ({
-  defaultTitle,
-  buildDir,
-  nodeEnv,
-  sessionSecret,
-  githubClientId,
-  githubSecret
-}) => {
+module.exports = () => {
   const app = express();
   app.disable('x-powered-by');
   cookieSessionOptions.keys = [sessionSecret];
@@ -36,14 +33,14 @@ module.exports = ({
     cookieSessionOptions.secure = true;
   }
   app.use(compression());
-  app.use(express.static(buildDir));
+  app.use(express.static(path.join(__dirname, '/../../build')));
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use(clientRequestMiddleware());
   app.use(cookieSession(cookieSessionOptions));
-  app.use(userAuthentication({ githubClientId, githubSecret, app }));
   app.use(csurf());
-  app.use(reactRendererMiddleware({ defaultTitle, appLayout }));
+  app.use(expressLinkMiddleware());
+  app.use(userAuthentication({ app }));
+  app.use(reactRendererMiddleware({ appLayout }));
   app.use(analyticsMiddleware({ analyticsRouter, app }));
   return applicationController({ app });
 };

@@ -1,11 +1,10 @@
 const crypto = require('crypto');
 const request = require('request-promise-native');
 
-module.exports = ({ githubClientId, githubSecret, app }) => (
-  _req,
-  _res,
-  next
-) => {
+const githubClientId = process.env.GITHUB_CLIENT_ID;
+const githubSecret = process.env.GITHUB_SECRET;
+
+module.exports = ({ app }) => (_req, _res, next) => {
   const callbackURI = '/auth/github/callback';
   const redirectURI = `http://localhost:5000${callbackURI}`;
   const githubAuthUrl = 'https://github.com/login/oauth/authorize';

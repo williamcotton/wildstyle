@@ -1,6 +1,8 @@
+/* global fetch */
+
 let initialRequest = true;
 
-module.exports = ({ analyticsRouter, fetch }) => {
+module.exports = ({ analyticsRouter }) => {
   const analyticsPublish = async (type, req, res, params) => {
     const {
       url,
