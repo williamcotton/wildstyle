@@ -10,10 +10,10 @@ const ProductComponent = product =>
 
 router.get(
   '/',
-  e(async ({ resources: { ProductResource } }, { renderApp }) => {
+  e(async ({ resources: { ProductResource } }, { renderComponent }) => {
     const response = await ProductResource.all();
     const products = response.data;
-    renderApp(h('ol', [products.map(ProductComponent)]));
+    renderComponent(h('ol', [products.map(ProductComponent)]));
   })
 );
 
@@ -22,11 +22,11 @@ router.get(
   e(
     async (
       { params: { id }, resources: { ProductResource } },
-      { renderApp }
+      { renderComponent }
     ) => {
       const response = await ProductResource.find(id);
       const product = response.data;
-      renderApp(ProductComponent(product));
+      renderComponent(ProductComponent(product));
     }
   )
 );

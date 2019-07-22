@@ -19,7 +19,7 @@ module.exports = ({ appLayout }) => (req, res, next) => {
 
   req.Form = Form;
 
-  res.renderApp = (content, options = {}) => {
+  res.renderComponent = (content, options = {}) => {
     const renderedContent = renderToString(h(appLayout, { content, req }));
     const { title } = options;
     const statusCode = options.statusCode || 200;

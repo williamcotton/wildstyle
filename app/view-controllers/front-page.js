@@ -4,8 +4,8 @@ const e = require('express-async-handler');
 
 router.get(
   '/',
-  e(async (req, { renderApp }) => {
-    renderApp(h('div', 'hello!'));
+  e(async (req, { renderComponent }) => {
+    renderComponent(h('div', 'hello!'));
   })
 );
 

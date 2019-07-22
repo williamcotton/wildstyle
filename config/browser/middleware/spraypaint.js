@@ -25,17 +25,6 @@ const resources = schema.resources.reduce((_resources, resource) => {
 }, {});
 
 module.exports = () => {
-  // const response = await fetch('/analytics', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     Accept: 'application/json',
-  //     'X-CSRF-Token': req.csrf,
-  //     'Override-Referer': referer
-  //   },
-  //   body: JSON.stringify({ type, url, statusCode, method, ...params })
-  // });
-  // return response.json();
   return (req, res, next) => {
     req.resources = resources;
 

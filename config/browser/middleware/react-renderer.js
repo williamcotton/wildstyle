@@ -32,7 +32,7 @@ module.exports = ({ app, appLayout }) => (req, res, next) => {
 
   req.Form = Form;
 
-  res.renderApp = (content, options = {}) => {
+  res.renderComponent = (content, options = {}) => {
     const { title } = options;
     const statusCode = options.statusCode || 200;
     const { appContainer } = req.renderDocument({ title });
