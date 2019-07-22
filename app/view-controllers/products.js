@@ -10,7 +10,7 @@ const ProductComponent = product =>
 
 router.get(
   '/',
-  e(async ({ resources: { ProductResource } }, { renderComponent }) => {
+  e(async ({ r: { ProductResource } }, { renderComponent }) => {
     const response = await ProductResource.all();
     const products = response.data;
     renderComponent(h('ol', [products.map(ProductComponent)]));
@@ -19,16 +19,11 @@ router.get(
 
 router.get(
   '/edit/:id',
-  e(
-    async (
-      { params: { id }, resources: { ProductResource } },
-      { renderComponent }
-    ) => {
-      const response = await ProductResource.find(id);
-      const product = response.data;
-      renderComponent(ProductComponent(product));
-    }
-  )
+  e(async ({ params: { id }, r: { ProductResource } }, { renderComponent }) => {
+    const response = await ProductResource.find(id);
+    const product = response.data;
+    renderComponent(ProductComponent(product));
+  })
 );
 
 module.exports = router;

@@ -10,23 +10,25 @@ const ApplicationRecord = SpraypaintBase.extend({
   }
 });
 
-const resources = schema.resources.reduce((_resources, resource) => {
-  // eslint-disable-next-line no-param-reassign
-  _resources[resource.name] = ApplicationRecord.extend({
-    static: {
-      jsonapiType: resource.type
-    },
-    attrs: Object.keys(resource.attributes).reduce((attrs, attrName) => {
-      attrs[attrName] = attr(); // eslint-disable-line no-param-reassign
-      return attrs;
-    }, {})
-  });
-  return _resources;
-}, {});
+const resources = schema.resources.reduce(
+  (allResources, resource) =>
+    Object.assign(allResources, {
+      [resource.name]: ApplicationRecord.extend({
+        static: {
+          jsonapiType: resource.type
+        },
+        attrs: Object.keys(resource.attributes).reduce(
+          (attrs, attrName) => Object.assign(attrs, { [attrName]: attr() }),
+          {}
+        )
+      })
+    }),
+  {}
+);
 
 module.exports = () => {
   return (req, res, next) => {
-    req.resources = resources;
+    req.r = resources;
 
     next();
   };
