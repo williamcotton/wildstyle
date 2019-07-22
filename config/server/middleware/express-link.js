@@ -1,14 +1,15 @@
 const qs = require('qs');
 
-const defaultTitle = process.env.DEFAULT_TITLE;
-
 const styleTag = '<link rel="stylesheet" href="/app.css" />';
 const scriptTag =
   '<script src="/app.js" type="text/javascript" charset="utf-8"></script>';
 const metaViewportTag =
   '<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>';
 
-const renderDocument = ({ clientRequest }) => ({ renderedContent, title }) => `
+const renderDocument = ({ defaultTitle, expressLink }) => ({
+  renderedContent,
+  title
+}) => `
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,27 +17,27 @@ const renderDocument = ({ clientRequest }) => ({ renderedContent, title }) => `
   ${metaViewportTag}
   <title>${title || defaultTitle}</title>
   ${styleTag}
-  <script type="text/javascript" charset="utf-8">
-    window.clientRequest = ${JSON.stringify(clientRequest)};
-  </script>
 </head>
 <body>
   <div id="app">${renderedContent}</div>
+  <script type="text/javascript" charset="utf-8">
+    window.expressLink = ${JSON.stringify(expressLink)};
+  </script>
   ${scriptTag}
 </body>
 </html>
 `;
 
-module.exports = () => (req, res, next) => {
+module.exports = ({ defaultTitle }) => (req, res, next) => {
   req.csrf = req.csrfToken();
 
-  res.clientRequest = {
+  res.expressLink = {
     csrf: req.csrf,
     defaultTitle
   };
 
   req.renderDocument = ({ renderedContent, title }) =>
-    renderDocument({ clientRequest: res.clientRequest })({
+    renderDocument({ defaultTitle, expressLink: res.expressLink })({
       renderedContent,
       title
     });

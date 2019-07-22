@@ -8,10 +8,10 @@ const path = require('path');
 
 const nodeEnv = process.env.NODE_ENV;
 const sessionSecret = process.env.SESSION_SECRET;
+const defaultTitle = process.env.DEFAULT_TITLE;
 
 const reactRendererMiddleware = require('./middleware/react-renderer');
 const analyticsMiddleware = require('./middleware/analytics');
-const userAuthentication = require('./middleware/user-authentication');
 const expressLinkMiddleware = require('./middleware/express-link');
 
 const applicationController = require('../../app/view-controllers/application');
@@ -38,8 +38,7 @@ module.exports = () => {
   app.use(bodyParser.json());
   app.use(cookieSession(cookieSessionOptions));
   app.use(csurf());
-  app.use(expressLinkMiddleware());
-  app.use(userAuthentication({ app }));
+  app.use(expressLinkMiddleware({ defaultTitle }));
   app.use(reactRendererMiddleware({ appLayout }));
   app.use(analyticsMiddleware({ analyticsRouter, app }));
   return applicationController({ app });

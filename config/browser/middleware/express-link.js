@@ -2,12 +2,12 @@
 
 const qs = require('qs');
 
-const { clientRequest } = window;
+const { expressLink } = window;
 
-const { defaultTitle } = clientRequest;
+const { defaultTitle } = expressLink;
 
 module.exports = () => (req, res, next) => {
-  Object.keys(clientRequest).forEach(key => (req[key] = clientRequest[key])); // eslint-disable-line no-return-assign
+  Object.keys(expressLink).forEach(key => (req[key] = expressLink[key])); // eslint-disable-line no-return-assign
 
   req.renderDocument = ({ title }) => {
     document.querySelector('title').innerText = title || defaultTitle; // eslint-disable-line no-param-reassign
