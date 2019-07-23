@@ -24,6 +24,8 @@ gem 'puma', '~> 3.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'pg'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -51,6 +53,7 @@ gem 'kaminari', '~> 1.0'
 gem 'responders', '~> 2.4'
 gem 'vandal_ui'
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker', '~> 1.7'
   gem 'graphiti_spec_helpers'
@@ -58,5 +61,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'apparition'
+  gem 'capybara'
   gem 'database_cleaner', '~> 1.6'
 end
