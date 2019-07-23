@@ -64,4 +64,5 @@ group :test do
   gem 'apparition'
   gem 'capybara'
   gem 'database_cleaner', '~> 1.6'
+  gem 'shoulda-matchers'
 end

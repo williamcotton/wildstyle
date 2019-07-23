@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProductResource, type: :resource do
@@ -16,9 +18,9 @@ RSpec.describe ProductResource, type: :resource do
     end
 
     it 'works' do
-      expect {
+      expect do
         expect(instance.save).to eq(true), instance.errors.full_messages.to_sentence
-      }.to change { Product.count }.by(1)
+      end.to change { Product.count }.by(1)
     end
   end
 
@@ -30,7 +32,9 @@ RSpec.describe ProductResource, type: :resource do
         data: {
           id: product.id.to_s,
           type: 'products',
-          attributes: { } # Todo!
+          attributes: {
+            title: 'test'
+          }
         }
       }
     end
@@ -39,11 +43,11 @@ RSpec.describe ProductResource, type: :resource do
       ProductResource.find(payload)
     end
 
-    xit 'works (add some attributes and enable this spec)' do
-      expect {
+    it 'works (add some attributes and enable this spec)' do
+      expect do
         expect(instance.update_attributes).to eq(true)
-      }.to change { product.reload.updated_at }
-      # .and change { product.foo }.to('bar') <- example
+      end.to change { product.reload.updated_at }
+        .and change { product.title }.to('test')
     end
   end
 
@@ -55,9 +59,9 @@ RSpec.describe ProductResource, type: :resource do
     end
 
     it 'works' do
-      expect {
+      expect do
         expect(instance.destroy).to eq(true)
-      }.to change { Product.count }.by(-1)
+      end.to change { Product.count }.by(-1)
     end
   end
 end

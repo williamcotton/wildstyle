@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "products#update", type: :request do
+RSpec.describe 'products#update', type: :request do
   subject(:make_request) do
     jsonapi_put "/api/v1/products/#{product.id}", payload
   end
@@ -14,19 +16,18 @@ RSpec.describe "products#update", type: :request do
           id: product.id.to_s,
           type: 'products',
           attributes: {
-            # ... your attrs here
+            description: 'description'
           }
         }
       }
     end
 
-    # Replace 'xit' with 'it' after adding attributes
-    xit 'updates the resource' do
+    it 'updates the resource' do
       expect(ProductResource).to receive(:find).and_call_original
-      expect {
+      expect do
         make_request
         expect(response.status).to eq(200), response.body
-      }.to change { product.reload.attributes }
+      end.to change { product.reload.attributes }
     end
   end
 end
