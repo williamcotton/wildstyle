@@ -13,7 +13,7 @@ const appLayout = require('../../app/views/layout');
 module.exports = () => {
   const app = express();
   app.use(expressLinkMiddleware());
-  app.use(spraypaintMiddleware());
+  app.use(spraypaintMiddleware({ baseUrl: '' }));
   app.use(reactRendererMiddleware({ app, appLayout }));
   app.use(analyticsMiddleware({ analyticsRouter }));
   const universalBrowserApp = applicationController({ app });

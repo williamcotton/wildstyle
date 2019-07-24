@@ -11,7 +11,7 @@ default: &default
   pool: 5
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASS'] %>
-  host: localhost
+  host: <%= ENV['DB_HOST'] %>
   port: 5432
 
 development:

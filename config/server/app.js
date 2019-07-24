@@ -9,6 +9,7 @@ const path = require('path');
 const nodeEnv = process.env.NODE_ENV;
 const sessionSecret = process.env.SESSION_SECRET;
 const defaultTitle = process.env.DEFAULT_TITLE;
+const apiBaseUrl = process.env.API_BASE_URL;
 
 const reactRendererMiddleware = require('./middleware/react-renderer');
 const analyticsMiddleware = require('./middleware/analytics');
@@ -40,7 +41,7 @@ module.exports = () => {
   app.use(cookieSession(cookieSessionOptions));
   app.use(csurf());
   app.use(expressLinkMiddleware({ defaultTitle }));
-  app.use(spraypaintMiddleware());
+  app.use(spraypaintMiddleware({ baseUrl: apiBaseUrl }));
   app.use(reactRendererMiddleware({ appLayout }));
   app.use(analyticsMiddleware({ analyticsRouter, app }));
   return applicationController({ app });
