@@ -9,7 +9,6 @@ feature 'front page' do
     end
 
     scenario 'it says hello!', :js do
-      expect(page).to have_content 'Wildstyle'
       expect(page).to have_content 'hello!'
     end
   end
