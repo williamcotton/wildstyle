@@ -8,4 +8,4 @@ COPY . /myapp
 EXPOSE 5000
 
 # Start the main process.
-CMD ["npm", "run", "start_dev"]
+CMD ["make", "start"]

@@ -56,6 +56,3 @@ build/app.js:
 
 build/schema.json:
 	curl http://localhost:3000/api/v1/vandal/schema.json > $@
-
-start_test_services:
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d

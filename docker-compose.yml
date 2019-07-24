@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_DB=wildstyle
     ports:
       - 5432:5432
     volumes:
@@ -18,8 +18,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
-    ports:
-      - 3000:3000
+    expose:
+      - '3000'
     environment:
       - DB_HOST=pg
     volumes:
@@ -32,8 +32,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
-    ports:
-      - 5000:5000
+    expose:
+      - '5000'
     environment:
       - API_BASE_URL=http://api:3000
     volumes:
@@ -49,5 +49,44 @@ services:
     depends_on:
       - web
       - api
+  test_api:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    expose:
+      - '3000'
+    environment:
+      - DB_HOST=pg
+      - RAILS_ENV=test
+    volumes:
+      - .:/myapp
+    depends_on:
+      - pg
+  test_web:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    expose:
+      - '5000'
+    environment:
+      - API_BASE_URL=http://test_api:3000
+    volumes:
+      - .:/myapp
+    depends_on:
+      - test_api
+  test_proxy:
+    image: nginx
+    volumes:
+      - ./nginx.test.conf:/etc/nginx/nginx.conf
+    ports:
+      - 2001:2001
+    depends_on:
+      - test_web
+      - test_api
+
 volumes:
   pg_data:

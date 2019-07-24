@@ -11,7 +11,7 @@ Capybara.configure do |config|
   config.default_driver = :apparition
   config.javascript_driver = :apparition
   config.run_server = false
-  config.app_host   = 'http://localhost:2000'
+  config.app_host   = ENV['TEST_HOST']
 end
 
 Capybara.current_session.driver.header('X-Content-Type-Options', 'nosniff')
