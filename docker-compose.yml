@@ -12,6 +12,42 @@ services:
       - 5432:5432
     volumes:
       - pg_data:/var/lib/postgresql/data
-
+  api:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=pg
+    volumes:
+      - .:/myapp
+    depends_on:
+      - pg
+  web:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - 5000:5000
+    environment:
+      - API_BASE_URL=http://api:3000
+    volumes:
+      - .:/myapp
+    depends_on:
+      - api
+  proxy:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 2000:2000
+    depends_on:
+      - web
+      - api
 volumes:
   pg_data:

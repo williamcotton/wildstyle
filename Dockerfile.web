@@ -1,0 +1,11 @@
+FROM node:12.5.0
+RUN mkdir /myapp
+WORKDIR /myapp
+COPY package*.json ./
+RUN npm install
+COPY . /myapp
+
+EXPOSE 5000
+
+# Start the main process.
+CMD ["npm", "run", "start_dev"]
