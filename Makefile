@@ -25,7 +25,7 @@ start_dev:
 	nodemon config/server/index.js -w app/ -w config/ --ext js
 
 start_rails:
-	bundle exec rails s
+	bundle exec rails server -b 0.0.0.0
 
 start_nginx:
 	nginx -c nginx.conf -p ./
