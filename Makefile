@@ -7,7 +7,7 @@ all: build .env
 
 build: build/app.js build/app.css build/schema.json
 
-start:
+start_web:
 	node config/server/index.js
 
 .env:
@@ -24,13 +24,10 @@ build_debug_js: clean_js
 start_dev:
 	nodemon config/server/index.js -w app/ -w config/ --ext js
 
-start_rails:
+start_api:
 	bundle exec rails server -b 0.0.0.0
 
-start_nginx:
-	nginx -c nginx.conf -p ./
-
-analyze:
+analyze_bundle:
 	browserify config/browser/index.js --full-paths $(browserify_production_flags) | ${terser_command} | discify --open
 
 clean: clean_css clean_js clean_schema

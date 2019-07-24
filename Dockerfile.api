@@ -11,4 +11,4 @@ COPY . /myapp
 EXPOSE 3000
 
 # Start the main process.
-CMD ["make", "start_rails"]
+CMD ["make", "start_api"]

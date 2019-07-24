@@ -8,4 +8,4 @@ COPY . /myapp
 EXPOSE 5000
 
 # Start the main process.
-CMD ["make", "start"]
+CMD ["make", "start_web"]
