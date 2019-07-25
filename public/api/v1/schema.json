@@ -101,6 +101,232 @@
         }
       },
       "relationships": {
+        "reviews": {
+          "type": "has_many",
+          "description": null,
+          "resource": "ReviewResource"
+        }
+      }
+    },
+    {
+      "name": "ReviewResource",
+      "type": "reviews",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "title": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "body": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        }
+      },
+      "extra_attributes": {
+      },
+      "sorts": {
+        "id": {
+        },
+        "title": {
+        },
+        "body": {
+        }
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "body": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        }
+      },
+      "relationships": {
+        "user": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "UserResource"
+        },
+        "product": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "ProductResource"
+        }
+      }
+    },
+    {
+      "name": "UserResource",
+      "type": "users",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "username": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "type": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "email": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "name": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        }
+      },
+      "extra_attributes": {
+      },
+      "sorts": {
+        "id": {
+        },
+        "username": {
+        },
+        "type": {
+        },
+        "email": {
+        },
+        "name": {
+        }
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "username": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "email": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ]
+        }
+      },
+      "relationships": {
+        "reviews": {
+          "type": "has_many",
+          "description": null,
+          "resource": "ReviewResource"
+        }
       }
     }
   ],
@@ -121,6 +347,44 @@
         },
         "destroy": {
           "resource": "ProductResource"
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "actions": {
+        "index": {
+          "resource": "ReviewResource"
+        },
+        "show": {
+          "resource": "ReviewResource"
+        },
+        "create": {
+          "resource": "ReviewResource"
+        },
+        "update": {
+          "resource": "ReviewResource"
+        },
+        "destroy": {
+          "resource": "ReviewResource"
+        }
+      }
+    },
+    "/api/v1/users": {
+      "actions": {
+        "index": {
+          "resource": "UserResource"
+        },
+        "show": {
+          "resource": "UserResource"
+        },
+        "create": {
+          "resource": "UserResource"
+        },
+        "update": {
+          "resource": "UserResource"
+        },
+        "destroy": {
+          "resource": "UserResource"
         }
       }
     }

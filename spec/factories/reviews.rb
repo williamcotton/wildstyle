@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :review do
     title { 'MyString' }
     body { 'MyString' }
-    user { nil }
-    product { nil }
+    user { create(:user) }
+    product { create(:product) }
   end
 end

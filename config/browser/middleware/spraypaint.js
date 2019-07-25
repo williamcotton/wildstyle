@@ -1,7 +1,7 @@
 require('isomorphic-fetch');
 const { SpraypaintBase, attr } = require('spraypaint');
 
-const schema = require('../../../build/schema.json');
+const schema = require('../../../public/api/v1/schema');
 
 module.exports = ({ baseUrl }) => {
   const ApplicationRecord = SpraypaintBase.extend({

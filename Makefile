@@ -5,7 +5,7 @@ terser_command = terser --compress --mangle
 
 all: build .env
 
-build: build/app.js build/app.css build/schema.json
+build: build/app.js build/app.css
 
 start_web:
 	node config/server/index.js
@@ -40,9 +40,6 @@ clean_js:
 	rm -f build/app.js
 	rm -f build/app.js.map
 
-clean_schema:
-	rm -f build/schema.json
-
 build/app.css:
 	mkdir -p build
 	"node-sass" app/styles/index.scss $@ --output-style compressed
@@ -50,6 +47,3 @@ build/app.css:
 build/app.js:
 	mkdir -p build
 	browserify config/browser/index.js $(browserify_production_flags) | ${terser_command} > $@
-
-build/schema.json:
-	curl http://localhost:2000/api/v1/vandal/schema.json > $@
