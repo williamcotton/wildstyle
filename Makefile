@@ -21,6 +21,9 @@ build_debug_css: clean_css
 build_debug_js: clean_js
 	watchify config/browser/index.js -o build/app.js -v -d
 
+dev:
+	docker-compose stop web && docker-compose run web npm run dev
+
 start_dev:
 	nodemon config/server/index.js -w app/ -w config/ --ext js
 
