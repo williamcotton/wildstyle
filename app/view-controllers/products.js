@@ -1,19 +1,30 @@
 const router = require('router')();
 const h = require('react-hyperscript');
 const e = require('express-async-handler');
+const { useContext } = require('react');
 
-const ProductComponent = product =>
-  h('li', { key: product.id }, [
-    h('h4', product.title),
+const { RequestContext } = require('../contexts');
+
+const ProductComponent = product => {
+  const { Link, baseUrl } = useContext(RequestContext);
+  return h('.review', [
+    h('h4', [h(Link, { href: `${baseUrl}/${product.id}` }, product.title)]),
     h('p', product.description)
   ]);
+};
 
 router.get(
   '/',
   e(async ({ r: { ProductResource } }, { renderComponent }) => {
     const response = await ProductResource.all();
     const products = response.data;
-    renderComponent(h('ol', [products.map(ProductComponent)]));
+    renderComponent(
+      h('ol', [
+        products.map(product =>
+          h('li', { key: product.id }, [h(ProductComponent, product)])
+        )
+      ])
+    );
   })
 );
 
@@ -22,7 +33,16 @@ router.get(
   e(async ({ params: { id }, r: { ProductResource } }, { renderComponent }) => {
     const response = await ProductResource.find(id);
     const product = response.data;
-    renderComponent(ProductComponent(product));
+    renderComponent(h(ProductComponent, product));
+  })
+);
+
+router.get(
+  '/:id',
+  e(async ({ params: { id }, r: { ProductResource } }, { renderComponent }) => {
+    const response = await ProductResource.find(id);
+    const product = response.data;
+    renderComponent(h(ProductComponent, product));
   })
 );
 
