@@ -55,6 +55,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
+    command: bundle exec rails server -b 0.0.0.0 --pid ./tmp/pids/test.pid
     expose:
       - '3000'
     environment:
