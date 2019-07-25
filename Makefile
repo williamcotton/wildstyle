@@ -52,4 +52,4 @@ build/app.js:
 	browserify config/browser/index.js $(browserify_production_flags) | ${terser_command} > $@
 
 build/schema.json:
-	curl http://localhost:3000/api/v1/vandal/schema.json > $@
+	curl http://localhost:2000/api/v1/vandal/schema.json > $@
