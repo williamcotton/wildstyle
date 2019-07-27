@@ -12,6 +12,8 @@ feature 'product pages', :js do
     end
 
     scenario 'has a list of products' do
+      page.save_screenshot('products.png')
+
       expect(page).to have_content product.title
       expect(page).to have_content product.description
     end
@@ -29,7 +31,10 @@ feature 'product pages', :js do
   end
 
   feature 'visiting /products/:id' do
+    let!(:review) { create(:review, product: product) }
+
     background do
+      # Faker::Config.random = Random.new(420)
       visit "/products/#{product.id}"
     end
 
@@ -39,25 +44,23 @@ feature 'product pages', :js do
     end
 
     context 'with a review' do
-      let!(:review) { create(:review) }
-
       scenario 'shows the review details' do
+        page.save_screenshot('product-review.png')
+
         expect(page).to have_content review.title
         expect(page).to have_content review.body
       end
     end
 
     context 'when submitting a new review' do
-      let(:review) { attributes_for(:review) }
-      let(:title) { review[:title] }
-      let(:body) { review[:body] }
+      let(:title) { Faker::TvShows::Simpsons.location }
+      let(:body) { Faker::TvShows::Simpsons.quote }
 
       scenario 'refreshes with new the review', :js do
         within('form') do
           fill_in 'title', with: title
+          sleep 0.5
           fill_in 'body', with: body
-
-          puts review[:body]
 
           page.save_screenshot('product-review-form.png')
 
@@ -67,7 +70,9 @@ feature 'product pages', :js do
         page.save_screenshot('product-review-form-after-submit.png')
 
         expect(page).to have_content title
+        expect(page).to have_content body
         expect(Review.last.title).to eq title
+        expect(Review.last.body).to eq body
       end
     end
   end

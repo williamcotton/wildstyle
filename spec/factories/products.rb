@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :product do
-    title { 'MyString' }
-    description { 'MyString' }
+    title { Faker::Music::GratefulDead.song }
+    description { Faker::Quote.famous_last_words }
     image_url { 'MyString' }
   end
 end

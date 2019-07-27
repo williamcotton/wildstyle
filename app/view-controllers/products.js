@@ -8,7 +8,13 @@ const { RequestContext } = require('../contexts');
 const ProductComponent = product => {
   const { Link, baseUrl } = useContext(RequestContext);
   return h('.product', [
-    h('h4', [h(Link, { href: `${baseUrl}/${product.id}` }, product.title)]),
+    h('h4', [
+      h(
+        Link,
+        { href: `${baseUrl}/${product.id}` },
+        `Grateful Dead - ${product.title}`
+      )
+    ]),
     h('p', product.description)
   ]);
 };
@@ -68,11 +74,7 @@ router.post(
   e(async ({ params: { id }, body, r: { ReviewResource } }, { redirect }) => {
     const review = new ReviewResource(body);
     review.product_id = id;
-    try {
-      await review.save();
-    } catch (error) {
-      console.error(error);
-    }
+    await review.save();
     redirect('back');
   })
 );

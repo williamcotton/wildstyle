@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :review do
-    title { 'MyString' }
-    body { 'MyString' }
+    title { Faker::TvShows::Simpsons.location }
+    body { Faker::TvShows::Simpsons.quote }
     user { create(:user) }
     product { create(:product) }
   end

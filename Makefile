@@ -24,6 +24,9 @@ build_debug_js: clean_js
 dev:
 	docker-compose stop web && docker-compose run web npm run dev
 
+test_dev:
+	docker-compose stop test_web && docker-compose run test_web npm run dev
+
 start_dev:
 	nodemon config/server/index.js -w app/ -w config/ --ext js
 
