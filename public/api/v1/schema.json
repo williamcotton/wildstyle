@@ -130,6 +130,18 @@
           "readable": true,
           "writable": true,
           "description": null
+        },
+        "product_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "user_id": {
+          "type": "integer",
+          "readable": true,
+          "writable": true,
+          "description": null
         }
       },
       "extra_attributes": {
@@ -140,6 +152,10 @@
         "title": {
         },
         "body": {
+        },
+        "product_id": {
+        },
+        "user_id": {
         }
       },
       "filters": {
@@ -182,6 +198,28 @@
             "not_suffix",
             "match",
             "not_match"
+          ]
+        },
+        "product_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "user_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
           ]
         }
       },

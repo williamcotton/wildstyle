@@ -15,6 +15,7 @@ const reactRendererMiddleware = require('./middleware/react-renderer');
 const analyticsMiddleware = require('./middleware/analytics');
 const expressLinkMiddleware = require('./middleware/express-link');
 const spraypaintMiddleware = require('../browser/middleware/spraypaint');
+const dataHydrationMiddleware = require('./middleware/data-hydration');
 
 const applicationController = require('../../app/view-controllers/application');
 const appLayout = require('../../app/views/layout');
@@ -41,6 +42,7 @@ module.exports = () => {
   app.use(cookieSession(cookieSessionOptions));
   app.use(csurf());
   app.use(expressLinkMiddleware({ defaultTitle }));
+  app.use(dataHydrationMiddleware());
   app.use(spraypaintMiddleware({ baseUrl: apiBaseUrl }));
   app.use(reactRendererMiddleware({ appLayout }));
   app.use(analyticsMiddleware({ analyticsRouter, app }));

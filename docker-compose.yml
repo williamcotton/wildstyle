@@ -40,7 +40,7 @@ services:
       - .:/myapp
     depends_on:
       - api
-  proxy:
+  app:
     image: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
@@ -79,7 +79,7 @@ services:
       - .:/myapp
     depends_on:
       - test_api
-  test_proxy:
+  test:
     image: nginx
     volumes:
       - ./nginx.test.conf:/etc/nginx/nginx.conf
