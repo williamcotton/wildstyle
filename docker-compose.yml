@@ -32,6 +32,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
+    command: npm run dev
     expose:
       - '5000'
     environment:
@@ -71,6 +72,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
+    command: npm run dev
     expose:
       - '5000'
     environment:
