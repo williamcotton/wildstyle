@@ -7,9 +7,8 @@
     "node": "11.13.0"
   },
   "scripts": {
-    "build": "make",
     "dev": "concurrently --kill-others \"make start_dev\" \"make build_debug_js\" \"make build_debug_css\"",
-    "lint": "eslint ./src ./test",
+    "lint": "eslint ./app",
     "update-packages": "ncu -u",
     "postinstall": "make"
   },

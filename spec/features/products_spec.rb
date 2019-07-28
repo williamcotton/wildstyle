@@ -51,29 +51,35 @@ feature 'product pages', :js do
         expect(page).to have_content review.body
       end
     end
+  end
 
-    context 'when submitting a new review' do
-      let(:title) { Faker::TvShows::Simpsons.location }
-      let(:body) { Faker::TvShows::Simpsons.quote }
+  feature 'visiting /products/:id and submitting a review' do
+    let!(:review) { create(:review, product: product) }
+    let(:title) { Faker::TvShows::Simpsons.location }
+    let(:body) { Faker::TvShows::Simpsons.quote }
 
-      scenario 'refreshes with new the review', :js do
-        within('form') do
-          fill_in 'title', with: title
-          sleep 0.5
-          fill_in 'body', with: body
+    background do
+      # Faker::Config.random = Random.new(420)
+      visit "/products/#{product.id}"
+    end
 
-          page.save_screenshot('product-review-form.png')
+    scenario 'updates the page with new the review', :js do
+      within('form') do
+        fill_in 'title', with: title
+        sleep 0.5
+        fill_in 'body', with: body
 
-          click_button 'Submit'
-        end
+        page.save_screenshot('product-review-form.png')
 
-        page.save_screenshot('product-review-form-after-submit.png')
-
-        expect(page).to have_content title
-        expect(page).to have_content body
-        expect(Review.last.title).to eq title
-        expect(Review.last.body).to eq body
+        click_button 'Submit'
       end
+
+      page.save_screenshot('product-review-form-after-submit.png')
+
+      expect(page).to have_content title
+      expect(page).to have_content body
+      expect(Review.last.title).to eq title
+      expect(Review.last.body).to eq body
     end
   end
 end
