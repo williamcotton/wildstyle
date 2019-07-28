@@ -46,11 +46,20 @@ router.get(
 );
 
 router.get(
-  '/edit/:id',
+  '/:id/edit',
   e(async ({ params: { id }, r: { ProductResource } }, { renderComponent }) => {
     const response = await ProductResource.find(id);
     const product = response.data;
     renderComponent(h(ProductComponent, product));
+  })
+);
+
+router.patch(
+  '/:id',
+  e(async ({ params: { id }, body, r: { ProductResource } }, { redirect }) => {
+    const product = new ProductResource({ id, ...body });
+    await product.save();
+    redirect('back');
   })
 );
 

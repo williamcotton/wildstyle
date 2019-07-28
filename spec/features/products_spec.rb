@@ -19,9 +19,9 @@ feature 'product pages', :js do
     end
   end
 
-  feature 'visiting /products/edit/:id' do
+  feature 'visiting /products/:id/edit' do
     background do
-      visit "/products/edit/#{product.id}"
+      visit "/products/#{product.id}/edit"
     end
 
     scenario 'shows the product details' do
