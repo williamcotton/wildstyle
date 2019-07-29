@@ -12,6 +12,8 @@ feature 'product pages', :js do
     end
 
     scenario 'has a list of products' do
+      sleep 0.5
+
       page.save_screenshot('products.png')
 
       expect(page).to have_content product.title
