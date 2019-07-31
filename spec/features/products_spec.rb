@@ -65,7 +65,7 @@ feature 'product pages', :js do
       visit "/products/#{product.id}"
     end
 
-    scenario 'updates the page with new the review', :js do
+    scenario 'updates the page with the new review', :js do
       within('form') do
         fill_in 'title', with: title
         sleep 0.5

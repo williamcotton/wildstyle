@@ -42,7 +42,7 @@ router.post(
   '/:id/review',
   e(async ({ params: { id }, body, r: { ReviewResource } }, { redirect }) => {
     const review = new ReviewResource(body);
-    review.product_id = id;
+    review.productId = id;
     await review.save();
     redirect('back');
   })

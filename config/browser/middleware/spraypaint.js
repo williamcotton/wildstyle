@@ -7,6 +7,8 @@ const {
   hasOne
 } = require('spraypaint');
 
+const { camelize } = require('inflected');
+
 const schema = require('../../../public/api/v1/schema');
 
 module.exports = ({ baseUrl }) => {
@@ -19,7 +21,8 @@ module.exports = ({ baseUrl }) => {
 
   const resources = schema.resources.reduce((allResources, resource) => {
     const attributes = Object.keys(resource.attributes).reduce(
-      (attrs, attrName) => Object.assign(attrs, { [attrName]: attr() }),
+      (attrs, attrName) =>
+        Object.assign(attrs, { [camelize(attrName, false)]: attr() }),
       {}
     );
 
@@ -27,7 +30,7 @@ module.exports = ({ baseUrl }) => {
       (attrs, relationshipName) => {
         const { type } = resource.relationships[relationshipName];
         return Object.assign(attrs, {
-          [relationshipName]:
+          [camelize(relationshipName, false)]:
             // eslint-disable-next-line no-nested-ternary
             type === 'has_many'
               ? hasMany()

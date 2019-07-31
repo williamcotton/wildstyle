@@ -5,6 +5,7 @@ class ReviewResource < ApplicationResource
   attribute :body, :string
   attribute :product_id, :integer
   attribute :user_id, :integer
+  attribute :created_at, :datetime
 
   belongs_to :user
   belongs_to :product

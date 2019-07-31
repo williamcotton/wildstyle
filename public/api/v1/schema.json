@@ -142,6 +142,12 @@
           "readable": true,
           "writable": true,
           "description": null
+        },
+        "created_at": {
+          "type": "datetime",
+          "readable": true,
+          "writable": true,
+          "description": null
         }
       },
       "extra_attributes": {
@@ -156,6 +162,8 @@
         "product_id": {
         },
         "user_id": {
+        },
+        "created_at": {
         }
       },
       "filters": {
@@ -213,6 +221,17 @@
         },
         "user_id": {
           "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "created_at": {
+          "type": "datetime",
           "operators": [
             "eq",
             "not_eq",

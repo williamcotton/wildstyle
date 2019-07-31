@@ -16,7 +16,11 @@ const ProductComponent = product => {
 exports.ProductComponent = ProductComponent;
 
 const ReviewComponent = review =>
-  h('.content', [h('.text', review.title), h('.text', review.body)]);
+  h('.content', [
+    h('.metadata', [h('span', review.createdAt)]),
+    h('.text', review.title),
+    h('.text', review.body)
+  ]);
 
 exports.ReviewComponent = ReviewComponent;
 

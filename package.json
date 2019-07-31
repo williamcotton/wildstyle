@@ -31,6 +31,7 @@
     "express-async-handler": "^1.1.4",
     "express-sslify": "^1.2.0",
     "form-serialize": "^0.7.2",
+    "inflected": "^2.0.4",
     "isomorphic-fetch": "^2.2.1",
     "node-sass": "^4.12.0",
     "qs": "^6.7.0",
