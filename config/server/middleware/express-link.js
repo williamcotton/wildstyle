@@ -32,6 +32,7 @@ module.exports = ({ defaultTitle }) => (req, res, next) => {
   req.csrf = req.csrfToken();
 
   res.expressLink = {
+    queryCache: {},
     csrf: req.csrf,
     defaultTitle
   };
@@ -48,6 +49,10 @@ module.exports = ({ defaultTitle }) => (req, res, next) => {
   };
 
   res.redirect = res.redirect.bind(res);
+
+  res.cacheQuery = (key, data) => {
+    res.expressLink.queryCache[key] = data;
+  };
 
   next();
 };
