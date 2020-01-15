@@ -35,8 +35,9 @@ module.exports = ({ app, appLayout }) => (req, res, next) => {
   res.renderComponent = (content, options = {}) => {
     const { title } = options;
     const statusCode = options.statusCode || 200;
+    const layout = options.layout || appLayout;
     const { appContainer } = req.renderDocument({ title });
-    ReactDOM.hydrate(h(appLayout, { content, req }), appContainer, () => {
+    ReactDOM.hydrate(h(layout, { content, req }), appContainer, () => {
       res.status(statusCode);
       res.send();
     });

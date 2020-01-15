@@ -20,7 +20,8 @@ module.exports = ({ appLayout }) => (req, res, next) => {
   req.Form = Form;
 
   res.renderComponent = (content, options = {}) => {
-    const renderedContent = renderToString(h(appLayout, { content, req }));
+    const layout = options.layout || appLayout;
+    const renderedContent = renderToString(h(layout, { content, req }));
     const { title } = options;
     const statusCode = options.statusCode || 200;
     res.writeHead(statusCode, { 'Content-Type': 'text/html' });
