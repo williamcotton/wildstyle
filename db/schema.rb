@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2019_07_18_152219) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "helpful_reviews", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "review_id"
+    t.bigint "user_id"
+    t.bigint "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["review_id"], name: "index_helpful_reviews_on_review_id"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 2019_07_18_152219) do
   end
 
   create_table "liked_products", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
+    t.bigint "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_liked_products_on_product_id"
@@ -41,8 +44,8 @@ ActiveRecord::Schema.define(version: 2019_07_18_152219) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.string "body"
-    t.integer "user_id"
-    t.integer "product_id"
+    t.bigint "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
@@ -58,4 +61,10 @@ ActiveRecord::Schema.define(version: 2019_07_18_152219) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "helpful_reviews", "reviews"
+  add_foreign_key "helpful_reviews", "users"
+  add_foreign_key "liked_products", "products"
+  add_foreign_key "liked_products", "users"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end
