@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 services:
   pg:
     env_file:
@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASS}
       - POSTGRES_DB=wildstyle
     ports:
-      - 5432:5432
+      - 5435:5432
     volumes:
       - pg_data:/var/lib/postgresql/data
   api:
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile.api
     expose:
-      - '3000'
+      - "3000"
     environment:
       - DB_HOST=pg
     volumes:
@@ -34,7 +34,7 @@ services:
       dockerfile: Dockerfile.web
     command: npm run dev
     expose:
-      - '5000'
+      - "5000"
     environment:
       - API_BASE_URL=http://api:3000
     volumes:
@@ -58,7 +58,7 @@ services:
       dockerfile: Dockerfile.api
     command: bundle exec rails server -b 0.0.0.0 --pid ./tmp/pids/test.pid
     expose:
-      - '3000'
+      - "3000"
     environment:
       - DB_HOST=pg
       - RAILS_ENV=test
@@ -74,7 +74,7 @@ services:
       dockerfile: Dockerfile.web
     command: npm run dev
     expose:
-      - '5000'
+      - "5000"
     environment:
       - API_BASE_URL=http://test_api:3000
     volumes:
